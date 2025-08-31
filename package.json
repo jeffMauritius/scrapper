@@ -1,0 +1,26 @@
+{
+  "name": "wedding-venues-scraper",
+  "version": "1.0.0",
+  "description": "Scraper pour les lieux de mariage",
+  "main": "index.js",
+  "scripts": {
+    "seed": "ts-node src/scripts/seed.ts",
+    "upload-images": "ts-node src/scripts/upload-images.ts",
+    "scrape": "ts-node src/scripts/scrape-all.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.10.0",
+    "@types/puppeteer": "^5.4.7",
+    "@vercel/blob": "^0.22.1",
+    "axios": "^1.8.4",
+    "cheerio": "^1.0.0-rc.12",
+    "playwright": "^1.51.1",
+    "puppeteer": "^24.5.0",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "prisma": "^5.10.0",
+    "ts-node": "^10.9.2"
+  }
+}

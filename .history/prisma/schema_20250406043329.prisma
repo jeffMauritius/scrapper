@@ -1,0 +1,236 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+
+enum ServiceType {
+  LIEU
+  TRAITEUR
+  FAIRE_PART
+  CADEAUX_INVITES
+  PHOTOGRAPHE
+  MUSIQUE
+  VOITURE
+  BUS
+  DECORATION
+  CHAPITEAU
+  ANIMATION
+  FLORISTE
+  LISTE
+  ORGANISATION
+  VIDEO
+  LUNE_DE_MIEL
+  WEDDING_CAKE
+  OFFICIANT
+  FOOD_TRUCK
+  VIN
+}
+
+enum VenueType {
+  DOMAINE
+  AUBERGE
+  HOTEL
+  RESTAURANT
+  SALLE_DE_RECEPTION
+  CHATEAU
+  BATEAU
+  PLAGE
+  UNKNOWN
+}
+
+model Media {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  url         String
+  type        String   // "IMAGE" ou "VIDEO"
+  title       String?
+  description String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  storefront  PartnerStorefront @relation(fields: [storefrontId], references: [id], onDelete: Cascade)
+  storefrontId String @db.ObjectId
+
+  @@index([storefrontId])
+}
+
+model ReceptionSpace {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  description     String
+  surface         Float
+  seatedCapacity  Int
+  standingCapacity Int
+  hasDanceFloor   Boolean  @default(false)
+  hasPmrAccess    Boolean  @default(false)
+  hasPrivateOutdoor Boolean @default(false)
+  storefrontId    String   @db.ObjectId
+  storefront      PartnerStorefront @relation(fields: [storefrontId], references: [id], onDelete: Cascade)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model ReceptionOptions {
+  id                      String   @id @default(auto()) @map("_id") @db.ObjectId
+  rentalDuration         String
+  price                  Float
+  accommodationType      String
+  numberOfRooms          Int
+  numberOfBeds           Int
+  hasMandatoryCaterer    Boolean  @default(false)
+  providesCatering       Boolean  @default(false)
+  allowsOwnDrinks        Boolean  @default(false)
+  hasCorkageFee          Boolean  @default(false)
+  corkageFee             Float    @default(0)
+  hasTimeLimit           Boolean  @default(false)
+  timeLimit              String?
+  hasMandatoryPhotographer Boolean @default(false)
+  hasMusicExclusivity    Boolean  @default(false)
+  additionalServices     String?
+  includesCleaning       Boolean  @default(false)
+  allowsPets             Boolean  @default(false)
+  allowsMultipleEvents   Boolean  @default(false)
+  hasSecurityGuard       Boolean  @default(false)
+  storefrontId           String   @unique @db.ObjectId
+  storefront             PartnerStorefront @relation(fields: [storefrontId], references: [id], onDelete: Cascade)
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+}
+
+model PartnerStorefront {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Informations de l'entreprise
+  companyName String
+  description String
+  logo        String?
+  isActive    Boolean @default(false)
+  serviceType ServiceType
+  venueType   VenueType? @default(UNKNOWN)
+
+  // Informations de facturation
+  billingStreet     String
+  billingCity       String
+  billingPostalCode String
+  billingCountry    String
+  siret             String
+  vatNumber         String
+
+  // Adresse du lieu
+  venueAddress   String?
+  venueLatitude  Float?
+  venueLongitude Float?
+
+  // Zone d'intervention
+  interventionType   String @default("all_france")
+  interventionRadius Int?   @default(50)
+
+  // Relations
+  userId String @unique @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
+  media  Media[]
+  receptionSpaces    ReceptionSpace[]
+  receptionOptions   ReceptionOptions?
+
+  @@map("partner_storefronts")
+}
+
+model User {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  name          String?
+  email         String?   @unique
+  password      String
+  emailVerified DateTime?
+  image         String?
+  role          String    @default("USER")
+  
+  // Relations
+  storefront    PartnerStorefront?
+  profile       Profile?
+
+  @@map("User")
+}
+
+model Profile {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  avatar      String?
+  phone       String?
+  address     String?
+  company     String?
+  website     String?
+  bio         String?
+  
+  // Relations
+  userId      String   @unique @db.ObjectId
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("profiles")
+}
+
+enum Role {
+  USER
+  PARTNER
+  ADMIN
+}
+
+model Establishment {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  type          String
+  name          String
+  description   String
+  startingPrice Float
+  currency      String    @default("EUR")
+  city          String
+  region        String
+  country       String    @default("France")
+  minCapacity   Int?
+  maxCapacity   Int?
+  rating        Float?
+  reviewCount   Int       @default(0)
+  url           String    @unique
+  images        Image[]
+  features      Feature[] @relation(fields: [featureIds], references: [id])
+  featureIds    String[]  @db.ObjectId
+  amenities     Amenity[] @relation(fields: [amenityIds], references: [id])
+  amenityIds    String[]  @db.ObjectId
+}
+
+model Image {
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  url             String
+  order           Int          @default(0)
+  establishment   Establishment @relation(fields: [establishmentId], references: [id])
+  establishmentId String       @db.ObjectId
+}
+
+model Feature {
+  id              String          @id @default(auto()) @map("_id") @db.ObjectId
+  name            String          @unique
+  establishments  Establishment[] @relation(fields: [establishmentIds], references: [id])
+  establishmentIds String[]      @db.ObjectId
+}
+
+model Amenity {
+  id              String          @id @default(auto()) @map("_id") @db.ObjectId
+  name            String          @unique
+  establishments  Establishment[] @relation(fields: [establishmentIds], references: [id])
+  establishmentIds String[]      @db.ObjectId
+}

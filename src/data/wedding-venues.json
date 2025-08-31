@@ -1,0 +1,85 @@
+{
+  "venues": [
+    {
+      "type": "Domaine mariage",
+      "name": "Domaine de la Maison de Colette",
+      "description": "Face à la mer, sans voisins ni vis à vis, au centre d'un Domaine de sept hectares classés-Approche éco-responsable, le Domaine de la Maison de Colette fera de votre mariage un moment inoubliable. Il s'agit du Domaine historique ayant appartenu à l'écrivaine Colette entre 1910 et 1926.",
+      "price": {
+        "startingPrice": 25000,
+        "currency": "EUR"
+      },
+      "address": {
+        "city": "Saint-Coulomb",
+        "region": "Ille et Vilaine",
+        "country": "France"
+      },
+      "capacity": {
+        "min": 20,
+        "max": 300
+      },
+      "images": [
+        "https://cdn0.mariages.net/vendor/1106/3_2/960/jpeg/img-1628_3_301106-172182712321649.jpeg",
+        "https://cdn0.mariages.net/vendor/1106/3_2/960/jpg/tcsa7smrn8p2l-souaesiu1xac83gzwfqnstyi4bix4ejxfpc_3_301106-170505144597866.jpeg",
+        "https://cdn0.mariages.net/vendor/1106/3_2/960/jpg/8cinmj8-fa3wgge9kjw-r-htm51mqyosnw-n-jog-scejxfpc_3_301106-170505143094023.jpeg",
+        "https://cdn0.mariages.net/vendor/1106/3_2/960/jpg/ax5ti4yim3rhqj3dl36pksugehdw26t-7s2azk6mqeuejxfpc_3_301106-170505144514132.jpeg",
+        "https://cdn0.mariages.net/vendor/1106/3_2/960/jpg/vue-depuis-espace-lounge-mariagenet_3_301106-168511001037083.jpeg"
+      ],
+      "rating": {
+        "score": 5.0,
+        "numberOfReviews": 8
+      }
+    },
+    {
+      "type": "Domaine mariage",
+      "name": "La Bastide de Fangouse",
+      "description": "Optez pour un mariage Provence chic à la Bastide de Fangouse. Situé à Entrecasteaux dans le Var, cette incroyable bâtisse du 18ème siècle vous offrira un cadre verdoyant et serein pour la célébration de votre mariage. Dans ce havre de paix, vous bénéficierez d'un service de qualité qui fera de votre mariage un moment inoubliable.",
+      "price": {
+        "startingPrice": 250,
+        "currency": "EUR"
+      },
+      "address": {
+        "city": "Entrecasteaux",
+        "region": "Var",
+        "country": "France"
+      },
+      "capacity": {
+        "min": 60,
+        "max": 120
+      },
+      "images": [
+        "https://cdn0.mariages.net/vendor/7134/3_2/960/jpg/juliendage-561_3_157134-173263140638266.jpeg",
+        "https://cdn0.mariages.net/vendor/7134/3_2/960/jpg/juliendage-19_3_157134-168709220690693.jpeg",
+        "https://cdn0.mariages.net/vendor/7134/3_2/960/jpg/julien-dage-697_3_157134-168709761181066.jpeg",
+        "https://cdn0.mariages.net/vendor/7134/3_2/960/jpg/5g9a1606_3_157134-158642037777824.jpeg"
+      ],
+      "rating": {
+        "score": 5.0,
+        "numberOfReviews": 158
+      }
+    },
+    {
+      "type": "Château mariage",
+      "name": "Château de Roquefeuille",
+      "description": "Plongez dans un cadre romantique et verdoyant, et laissez-vous séduire par le charme du Château de Roquefeuille. Situé à quelques minutes d'Aix-en-Provence, ce domaine offre un cadre luxueux, parfait pour une célébration inoubliable, entouré de vos proches.",
+      "price": {
+        "startingPrice": 6500,
+        "currency": "EUR"
+      },
+      "address": {
+        "city": "Trets",
+        "region": "Bouches-du-Rhône",
+        "country": "France"
+      },
+      "capacity": {
+        "max": 400
+      },
+      "images": [
+        "https://cdn0.mariages.net/vendor/7526/3_2/960/jpg/daniel-pelcat-photographe-338_3_137526-173202669310327.jpeg"
+      ],
+      "rating": {
+        "score": 4.9,
+        "numberOfReviews": 76
+      }
+    }
+  ]
+}

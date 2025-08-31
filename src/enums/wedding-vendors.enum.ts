@@ -1,0 +1,21 @@
+export enum WeddingVendorType {
+  CATERING = 'Traiteur mariage',
+  INVITATIONS = 'Faire part mariage',
+  GUEST_GIFTS = 'Cadeaux invités mariage',
+  PHOTOGRAPHY = 'Photo mariage',
+  VIDEO = 'Vidéo mariage',
+  MUSIC = 'Musique mariage',
+  CAR = 'Voiture mariage',
+  TRANSPORTATION = 'Bus mariage',
+  DECORATION = 'Décoration mariage',
+  ENTERTAINMENT = 'Animation mariage',
+  FLOWERS = 'Fleurs mariage',
+  REGISTRY = 'Liste de mariage',
+  PLANNING = 'Organisation mariage',
+  HONEYMOON = 'Lune de miel',
+  WEDDING_CAKE = 'Wedding cake',
+  FOOD_TRUCK = 'Food Truck',
+  OFFICIANTS = 'Officiants',
+  WINE_SPIRITS = 'Vin et Spiritueux',
+  DJ = 'DJ mariage'
+}
